@@ -94,7 +94,7 @@ print(lsresponse["body"]["resources"][0])
 gresponse = rtr.execute_active_responder_command(base_command="get",
                                   command_string=f"get 'C:\\history.csv'",
                                   session_id=session_id,
-                                  timeout_duration="5m"
+                                  timeout="1000"
                                   )
 getresponse = rtr.check_active_responder_command_status(cloud_request_id=gresponse["body"]["resources"][0]["cloud_request_id"])
 print(getresponse)
@@ -105,8 +105,22 @@ while waiting:
     print("Waiting for history.csv file...")
     time.sleep(20)
     getresponse = rtr.check_active_responder_command_status(cloud_request_id=gresponse["body"]["resources"][0]["cloud_request_id"])
-    if getresponse["body"]["resources"][0]["complete"] and getresponse["body"]["resources"][0]["stdout"]: 
-            waiting = False
+    if getresponse["body"]["resources"][0]["complete"] and getresponse["body"]["resources"][0]["stdout"] or getresponse["body"]["resources"][0]["stderr"]: 
+            if getresponse["body"]["resources"][0]["stderr"]:
+                waiting = True
+            if getresponse["body"]["resources"][0]["complete"] and getresponse["body"]["resources"][0]["stdout"]:
+                waiting = False
+
+# Delete session file
+# from falconpy import RealTimeResponse
+
+# # Do not hardcode API credentials!
+# falcon = RealTimeResponse(client_id=CLIENT_ID,
+#                           client_secret=CLIENT_SECRET
+#                           )
+
+# response = falcon.delete_file(session_id="string", ids="string")
+# print(response)
 
 # Will work on implemem=nting more robust error checking.
 # waiting = True
