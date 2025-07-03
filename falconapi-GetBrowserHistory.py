@@ -91,11 +91,12 @@ print(lsresponse["body"]["resources"][0])
 
 
 # Get the history.csv file (user browsing history)
-gresponse = rtradm.execute_admin_command(base_command="get",
+gresponse = rtr.execute_active_responder_command(base_command="get",
                                   command_string=f"get 'C:\\history.csv'",
-                                  session_id=session_id
+                                  session_id=session_id,
+                                  timeout_duration="5m"
                                   )
-getresponse = rtr.check_command_status(cloud_request_id=gresponse["body"]["resources"][0]["cloud_request_id"])
+getresponse = rtr.check_active_responder_command_status(cloud_request_id=gresponse["body"]["resources"][0]["cloud_request_id"])
 print(getresponse)
 print(getresponse["body"]["resources"][0])
 
@@ -103,7 +104,7 @@ waiting = True
 while waiting:
     print("Waiting for history.csv file...")
     time.sleep(20)
-    getresponse = rtr.check_command_status(cloud_request_id=gresponse["body"]["resources"][0]["cloud_request_id"])
+    getresponse = rtr.check_active_responder_command_status(cloud_request_id=gresponse["body"]["resources"][0]["cloud_request_id"])
     if getresponse["body"]["resources"][0]["complete"] and getresponse["body"]["resources"][0]["stdout"]: 
             waiting = False
 
