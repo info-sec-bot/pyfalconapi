@@ -91,13 +91,35 @@ print(lsresponse["body"]["resources"][0])
 
 
 # Get the history.csv file (user browsing history)
-response = rtradm.execute_admin_command(base_command="get",
+gresponse = rtradm.execute_admin_command(base_command="get",
                                   command_string=f"get 'C:\\history.csv'",
                                   session_id=session_id
                                   )
-print(response)
+getresponse = rtr.check_command_status(cloud_request_id=gresponse["body"]["resources"][0]["cloud_request_id"])
+print(getresponse)
+print(getresponse["body"]["resources"][0])
 
+waiting = True
+while waiting:
+    print("Waiting for history.csv file...")
+    time.sleep(20)
+    getresponse = rtr.check_command_status(cloud_request_id=gresponse["body"]["resources"][0]["cloud_request_id"])
+    if getresponse["body"]["resources"][0]["complete"] and getresponse["body"]["resources"][0]["stdout"]: 
+            waiting = False
+
+# Will work on implemem=nting more robust error checking.
+# waiting = True
+# while waiting:
+#     print("Waiting for history.csv file...")
+#     getresponse = rtr.check_command_status(cloud_request_id=gresponse["body"]["resources"][0]["cloud_request_id"])
+#     if getresponse["body"]["resources"][0]["complete"] and (getresponse["body"]["resources"][0]["stdout"] or getresponse["body"]["resources"][0]["stderr"]):
+#             if getresponse["body"]["resources"][0]["stderr"]:
+#                 print("This is stderr: ", getresponse["body"]["resources"][0]["stderr"])
+#                 if getresponse["body"]["resources"][0]["stderr"]:
+#                     raise SystemExit(getresponse["body"]["resources"][0]["stderr"])
+#             waiting = False
 # Get files available for download
+
 file_list = rtr.list_files_v2(session_id)["body"]["resources"]
 print(type(file_list))
 print(file_list)
@@ -107,7 +129,7 @@ for key in file_list[0]:
 # Loop through files and obtain correct sha256 hash
 for i in range(len(file_list)):
     print(file_list[i]["sha256"])
-    if file_list[i]["sha256"]:
+    if file_list[i]["sha256"] != None:
 
         print(file_list[i]["sha256"])
         save_file = "webhistory.7z"
