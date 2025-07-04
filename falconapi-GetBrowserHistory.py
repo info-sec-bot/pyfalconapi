@@ -126,7 +126,7 @@ falcon = RealTimeResponse(client_id=CLIENT_ID,
                           client_secret=CLIENT_SECRET
                           )
 
-response = falcon.delete_file(session_id=session_id, ids="29e6ba5ff53af7ef11113ef5071d21ecb0a9a63f0e52204bdddbec9142aba4c6")
+response = falcon.delete_file(session_id=session_id, ids="")
 print(response)
 
 # Will work on implemem=nting more robust error checking.
