@@ -1,7 +1,7 @@
 
 import os
 import time
-
+import re
 # Requires Crowdstrike falcon and falconpy python package
 
 from falconpy import RealTimeResponse, RealTimeResponseAdmin, Hosts
@@ -18,6 +18,7 @@ falcon = Hosts(client_id=CLIENT_ID,
                client_secret=CLIENT_SECRET
                )
 
+# Must be valid hostname with sensor - case insensitivels
 gethostname = input("Please enter hostname: ")
 hostname = gethostname
 
@@ -114,20 +115,11 @@ while waiting:
                                   timeout="1000"
                                   )
                 getresponse = rtr.check_active_responder_command_status(cloud_request_id=gresponse["body"]["resources"][0]["cloud_request_id"])
+                if getresponse["body"]["resources"][0]["complete"] and getresponse["body"]["resources"][0]["stdout"]:
+                    waiting = False
                 waiting = True
             if getresponse["body"]["resources"][0]["complete"] and getresponse["body"]["resources"][0]["stdout"]:
                 waiting = False
-
-# Delete session file
-from falconpy import RealTimeResponse
-
-# Do not hardcode API credentials!
-falcon = RealTimeResponse(client_id=CLIENT_ID,
-                          client_secret=CLIENT_SECRET
-                          )
-
-response = falcon.delete_file(session_id=session_id, ids="29e6ba5ff53af7ef11113ef5071d21ecb0a9a63f0e52204bdddbec9142aba4c6")
-print(response)
 
 # Will work on implemem=nting more robust error checking.
 # waiting = True
@@ -163,6 +155,3 @@ for i in range(len(file_list)):
         # Extract file to current directory
         with open(save_file, 'wb') as saved:
             saved.write(file_extract)
-
-
-
