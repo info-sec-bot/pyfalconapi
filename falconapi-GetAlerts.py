@@ -33,7 +33,7 @@ for i in range(len(response["body"]["resources"])):
     print("Composite id:",response["body"]["resources"][i]["composite_id"],"\n")
     print("Alert name: ",response["body"]["resources"][i]["display_name"],"\n")
     print("Alert description: ",response["body"]["resources"][i]["description"])
-    print("Alert description: ",response["body"]["resources"][i]["severity_name"])
+    print("Alert severity: ",response["body"]["resources"][i]["severity_name"])
     try:
         print("Source IP Addresses: ",response["body"]["resources"][i]["source_ips"],"\n")
     except: ("print")
