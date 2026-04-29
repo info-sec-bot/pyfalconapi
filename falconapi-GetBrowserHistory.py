@@ -3,7 +3,14 @@ import time
 import sys
 import re
 import logging
+
 # Requires Crowdstrike falcon and falconpy python package
+from falcon_auth import get_falcon_credentials
+
+creds = get_falcon_credentials()
+
+print(creds["client_id"], creds["client_secret"],
+creds["rclient_id"], creds["rclient_secret"])
 
 from falconpy import RealTimeResponse, RealTimeResponseAdmin, Hosts
 
