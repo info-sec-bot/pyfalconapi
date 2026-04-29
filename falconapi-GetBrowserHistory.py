@@ -9,20 +9,26 @@ from falcon_auth import get_falcon_credentials
 
 creds = get_falcon_credentials()
 
-print(creds["client_id"], creds["client_secret"],
-creds["rclient_id"], creds["rclient_secret"])
+# Just testing that the proper creds are returned from the function
+# print(creds["client_id"], creds["client_secret"],
+# creds["rclient_id"], creds["rclient_secret"])
 
 from falconpy import RealTimeResponse, RealTimeResponseAdmin, Hosts
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger(__name__)
 
+# Old authentication method using environment variables
 # Do not hardcode API credentials!
-RCLIENT_ID = os.environ['RCLIENTID']
-RCLIENT_SECRET = os.environ['RCLIENT_SECRET']
-CLIENT_ID = os.environ['CLIENT_ID']
-CLIENT_SECRET = os.environ['CLIENT_SECRET']
+# RCLIENT_ID = os.environ['RCLIENTID']
+# RCLIENT_SECRET = os.environ['RCLIENT_SECRET']
+# CLIENT_ID = os.environ['CLIENT_ID']
+# CLIENT_SECRET = os.environ['CLIENT_SECRET']
 
+RCLIENT_ID = creds['rclient_id']
+RCLIENT_SECRET = creds['rclient_secret']
+CLIENT_ID = creds['client_id']
+CLIENT_SECRET = creds['client_secret']
 
 def check_api_response(response, context="API call"):
     """
@@ -171,7 +177,7 @@ except RuntimeError as e:
     sys.exit(1)
 
 # ── Get history.csv ───────────────────────────────────────────────────────────
-MAX_GET_RETRIES = 3
+MAX_GET_RETRIES = 13
 POLL_INTERVAL_SECONDS = 20
 MAX_POLL_ATTEMPTS = 15
 
