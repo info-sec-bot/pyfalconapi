@@ -18,8 +18,8 @@
 #### 1. `falconapi-GetBrowserHistory.py` uses the `BrowsingHistoryView.exe` executable provided by NirSoft
 ####     https://www.nirsoft.net/utils/browsing_history_view.html
 #### 2. The executable must be uploaded to the Falcon console prior to execution. 
-#### Upload the Executable: Upload your binary (e.g., .exe, .ps1) to the CrowdStrike Falcon RTR Library 
-#### (under Configuration -> File library).
+#### 3. Upload the Executable: Upload your binary (e.g., .exe, .ps1) to the CrowdStrike Falcon RTR Library 
+#####   (under Configuration -> File library).
 ## Usage
 #### `python3 falconapi-GetBrowserHistory.py`
 ```
