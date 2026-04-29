@@ -19,3 +19,15 @@
 #### 2. The executable must be uploaded to the Falcon console prior to execution. 
 #### Upload the Executable: Upload your binary (e.g., .exe, .ps1) to the CrowdStrike Falcon RTR Library 
 #### (under Configuration -> File library).
+## Usage
+#### `python3 falconapi-GetBrowserHistory.py`
+```
+Please enter hostname: UserHostPC
+2026-04-29 11:59:49,335 [INFO] Querying devices for hostname pattern: 'UserHostPC'
+2026-04-29 11:59:50,034 [INFO] Fetching device details for AID: abc123
+2026-04-29 11:59:50,493 [INFO] Initiating RTR session for device: 456cba
+2026-04-29 11:59:52,097 [INFO] RTR session established: 111-222-333-444-55555
+2026-04-29 11:59:52,582 [INFO] Putting BrowsingHistoryView.exe on host...
+2026-04-29 11:59:53,081 [INFO] Running 'Pull Browser History' script on host...
+2026-04-29 11:59:53,640 [INFO] Running ls command on host...
+```
