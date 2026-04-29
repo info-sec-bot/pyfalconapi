@@ -12,7 +12,8 @@
 #### https://falconpy.io/Home.html
 
 ## Authentication
-#### 1. `falconapi-GetBrowserHistory.py` uses the `falcon_auth.py` module to use API credentials stored in a keyvault. See the comments in the `falcon_auth.py` code for further guidance on vault set up. You will need to be logged in as a user with required privileges to access.
+#### 1. `falconapi-GetBrowserHistory.py` uses the `falcon_auth.py` module to use API credentials stored in a keyvault. 
+#### 2. See the comments in the `falcon_auth.py` code for further guidance on vault set up. You will need to be logged in as a user with required privileges to access.
 ## Actions
 #### 1. `falconapi-GetBrowserHistory.py` uses the `BrowsingHistoryView.exe` executable provided by NirSoft
 ####     https://www.nirsoft.net/utils/browsing_history_view.html
