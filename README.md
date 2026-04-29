@@ -1,5 +1,5 @@
 <p align="left">
-    <img src="img/SQL.png" alt="pyfalconapi"  width="300" height="200">
+    <img src="Pyfalconapi.png" alt="pyfalconapi">
 </p>
 
 # pyfalconapi
